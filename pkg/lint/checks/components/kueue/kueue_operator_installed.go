@@ -90,14 +90,14 @@ func (c *OperatorInstalledCheck) validateManaged(
 			check.ConditionTypeCompatible,
 			metav1.ConditionFalse,
 			check.WithReason(check.ReasonVersionIncompatible),
-			check.WithMessage("kueue-operator (%s) is installed but Kueue managementState is Managed — the two cannot coexist", found.Version),
+			check.WithMessage("RHBoK operator (%s) is installed but Kueue managementState is Managed — the two cannot coexist", found.Version),
 		))
 	default:
 		req.Result.SetCondition(check.NewCondition(
 			check.ConditionTypeCompatible,
 			metav1.ConditionTrue,
 			check.WithReason(check.ReasonVersionCompatible),
-			check.WithMessage("kueue-operator is not installed — consistent with Managed state"),
+			check.WithMessage("RHBoK operator is not installed — consistent with Managed state"),
 		))
 	}
 }
@@ -113,14 +113,14 @@ func (c *OperatorInstalledCheck) validateUnmanaged(
 			check.ConditionTypeCompatible,
 			metav1.ConditionFalse,
 			check.WithReason(check.ReasonVersionIncompatible),
-			check.WithMessage("kueue-operator is not installed but Kueue managementState is Unmanaged — the standalone operator is required"),
+			check.WithMessage("RHBoK operator is not installed but Kueue managementState is Unmanaged — RHBoK operator is required"),
 		))
 	default:
 		req.Result.SetCondition(check.NewCondition(
 			check.ConditionTypeCompatible,
 			metav1.ConditionTrue,
 			check.WithReason(check.ReasonVersionCompatible),
-			check.WithMessage("kueue-operator installed: %s", found.Version),
+			check.WithMessage("RHBoK operator installed: %s", found.Version),
 		))
 	}
 }
